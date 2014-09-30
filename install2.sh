@@ -10,7 +10,6 @@ wget -P /home/distrib/ http://nginx.org/download/nginx-1.7.4.tar.gz &&
 cd /home/distrib/ && tar -xvpzf nginx-1.7.4.tar.gz &&
 cd /home/distrib/nginx-1.7.4 && ./configure &&
 make && make install &&
-ln -s /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
 cp /home/install/nginx /etc/init.d/ &&
 chmod 755 /etc/init.d/nginx
 cd /home/distrib/
@@ -26,6 +25,7 @@ cd /home/distrib/nginx-1.7.4 &&
 make && make install &&
 rm -rf /usr/local/nginx/conf/nginx.conf
 cp /home/install/nginx.conf /usr/locale/nginx/conf/
+ln -s /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
 /usr/local/sbin/nginx
 service nginx restart
 
