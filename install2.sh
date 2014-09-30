@@ -20,9 +20,6 @@ cd ./mod_security/ &&
 ./autogen.sh &&
 ./configure --enable-standalone-module --disable-apache2-module &&
 make &&
-cp modsecurity.conf-recommended /usr/local/nginx/conf/
-mv /usr/local/nginx/conf/modsecurity.conf-recommended modsecurity.conf
-cp unicode.mapping /usr/local/nginx/conf/
 
 cd /home/distrib/nginx-1.7.4 &&
 ./configure --add-module=../mod_security/nginx/modsecurity &&
@@ -33,6 +30,9 @@ cp /home/install/nginx.conf /usr/locale/nginx/conf/
 service nginx restart
 
 cd /home/distrib/ &&
+cp modsecurity.conf-recommended /usr/local/nginx/conf/
+mv /usr/local/nginx/conf/modsecurity.conf-recommended modsecurity.conf
+cp unicode.mapping /usr/local/nginx/conf/
 git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
 echo -e “\n\nMod-Security CRS 10 conf” >> /usr/locale/nginx/conf/modsecurity.conf
 cat /home/distrib/owasp-modsecurity-crs/modsecurity_crs_10_setup.conf.example >> /usr/locale/nginx/conf/modsecurity.conf
