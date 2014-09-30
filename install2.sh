@@ -25,14 +25,14 @@ cd /home/distrib/nginx-1.7.4 &&
 make && make install &&
 rm -rf /usr/local/nginx/conf/nginx.conf
 cp /home/install/nginx.conf /usr/local/nginx/conf/
+cp /home/distrib/mod_security/modsecurity.conf-recommended /usr/local/nginx/conf/
+mv /usr/local/nginx/conf/modsecurity.conf-recommended /usr/local/nginx/conf/modsecurity.conf
+cp /home/distrib/mod_security/unicode.mapping /usr/local/nginx/conf/
 ln -s /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
-/usr/local/sbin/nginx
+/usr/local/nginx/sbin/nginx
 service nginx restart
 
 cd /home/distrib/ &&
-cp /home/distrib/mod_security/modsecurity.conf-recommended /usr/local/nginx/conf/
-mv /usr/local/nginx/conf/modsecurity.conf-recommended modsecurity.conf
-cp unicode.mapping /usr/local/nginx/conf/
 git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
 echo -e “\n\nMod-Security CRS 10 conf” >> /usr/local/nginx/conf/modsecurity.conf
 cat /home/distrib/owasp-modsecurity-crs/modsecurity_crs_10_setup.conf.example >> /usr/local/nginx/conf/modsecurity.conf
