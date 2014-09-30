@@ -34,9 +34,9 @@ service nginx restart
 
 cd /home/distrib/ &&
 git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
-echo -e “\n\nMod-Security CRS 10 conf” >> /usr/local/nginx/conf/modsecurity.conf
+echo -e "\n\n########## Mod-Security CRS 10 conf ##########" >> /usr/local/nginx/conf/modsecurity.conf
 cat /home/distrib/owasp-modsecurity-crs/modsecurity_crs_10_setup.conf.example >> /usr/local/nginx/conf/modsecurity.conf
-echo -e “\n\nBase Mod-Security OWASP CRS” >> /usr/local/nginx/conf/modsecurity.conf
+echo -e "\n\n########## Base Mod-Security OWASP CRS ##########" >> /usr/local/nginx/conf/modsecurity.conf
 cat /home/distrib/owasp-modsecurity-crs/base_rules/*.conf >> /usr/local/nginx/conf/modsecurity.conf
 cp /home/distrib/owasp-modsecurity-crs/base_rules/*.data /usr/local/nginx/conf/
 service nginx restart
