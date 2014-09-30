@@ -3,7 +3,7 @@
 
 apt-get update
 apt-get upgrade
-apt-get install build-essential libcurl4-gnutls-dev apache2-threaded-dev libtool dh-autoreconf libxml2 libxml2-dev libxml2-utils libaprutil1 libaprutil1-dev
+apt-get install -y build-essential libcurl4-gnutls-dev apache2-threaded-dev libtool dh-autoreconf libxml2 libxml2-dev libxml2-utils libaprutil1 libaprutil1-dev
 mkdir /home/distrib
 
 wget -P /home/distrib/ http://nginx.org/download/nginx-1.7.4.tar.gz &&
