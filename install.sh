@@ -14,6 +14,9 @@ make && make install &&
 wget -P /etc/init.d/ https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/nginx
 chmod 755 /etc/init.d/nginx
 
+cd /home/distrib &&
+git clone https://github.com/kyprizel/testcookie-nginx-module.git
+
 cd /home/distrib/ &&
 git clone https://github.com/SpiderLabs/ModSecurity.git mod_security &&
 cd ./mod_security/ &&
@@ -46,7 +49,7 @@ ldconfig &&
 export LUAJIT_LIB=/usr/local/lib
 export LUAJIT_INC=/usr/local/include/luajit-2.0
 
-cd /home/distrib/nginx-1.7.4 && ./configure --sbin-path=/usr/local/sbin/nginx --conf-path=/etc/nginx/conf/nginx.conf --pid-path=/run/nginx.pid --with-http_geoip_module --add-module=../mod_security/nginx/modsecurity --add-module=../ngx_devel_kit --add-module=../lua-nginx-module &&
+cd /home/distrib/nginx-1.7.4 && ./configure --sbin-path=/usr/local/sbin/nginx --conf-path=/etc/nginx/conf/nginx.conf --pid-path=/run/nginx.pid --with-http_geoip_module --add-module=../mod_security/nginx/modsecurity --add-module=../ngx_devel_kit --add-module=../lua-nginx-module  --add-module=../testcookie-nginx-module &&
 make && make install &&
 rm -rf /etc/nginx/conf/nginx.conf
 cp /home/install/nginx.conf /etc/nginx/conf/
