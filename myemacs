@@ -1,0 +1,101 @@
+;******************************************************************************;
+;                                                                              ;
+;                                                         :::      ::::::::    ;
+;    .myemacs                                           :+:      :+:    :+:    ;
+;                                                     +:+ +:+         +:+      ;
+;    By: sconso <sconso@student.42.fr>              +#+  +:+       +#+         ;
+;                                                 +#+#+#+#+#+   +#+            ;
+;    Created: 2013/11/19 09:40:15 by sconso            #+#    #+#              ;
+;    Updated: 2014/05/27 17:22:49 by ggarrigu         ###   ########.fr        ;
+;                                                                              ;
+;******************************************************************************;
+
+;; Activer la coloration syntaxique
+(global-font-lock-mode t)
+
+;; Activer le numéro de ligne
+(global-linum-mode 1)
+
+;; Colorise en Rouge les espace
+(setq show-trailing-whitespace t)
+(setq-default show-trailing-whitespace t)
+
+;; Enable mouse support
+(unless window-system
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (global-set-key [mouse-4] '(lambda ()
+                              (interactive)
+                              (scroll-down 1)))
+  (global-set-key [mouse-5] '(lambda ()
+                              (interactive)
+                              (scroll-up 1)))
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+)
+
+;; Supprime les fichier ~
+(setq make-backup-files nil)
+
+;; Affiche la parenthese & Accolade parrente
+(require 'paren)
+(show-paren-mode)
+
+;; parenthese en couleur
+(custom-set-variables
+ '(show-paren-mode t))
+(custom-set-faces)
+
+;; Affiche le numero de ligne et de colonne
+(column-number-mode t)
+(line-number-mode t)
+
+;; Remplacer le texte selectionne si on tape
+(delete-selection-mode t)
+
+;; Enlever le message au demarrage
+(setq inhibit-startup-message t)
+
+; Supprime tous les espaces en fin de ligne 
+; http://www.splode.com/users/friedman...re/emacs-lisp/ 
+(autoload 'nuke-trailing-whitespace "whitespace" nil t)
+
+;; Skeleton des Makefiles
+(define-skeleton create-makefile
+  "Create a Makefile."
+  ""
+  "NAME =\n"
+  "\n"
+  "SRCDIR = src\n"
+  "OBJDIR = obj\n"
+  "\n"
+  "SRC =\n"
+  "\n"
+  "LIB = -Llib/ -lft\n"
+  "INC = -I -Iinclude/\n"
+  "\n"
+  "OBJ = $(SRC:.c=.o)\n"
+  "CC = gcc\n"
+  "CFLAGS = -Wall -Wextra -Werror -O2\n"
+  "CDEBUG = -Wextra -Werror -Wall -pedantic -g -ggdb\n"
+  "\n"
+  "all : $(NAME)\n"
+  "\n"
+  "$(NAME) : $(OBJ)\n"
+  "		@$(CC) $(INC) $(CFLAGS) -o $(NAME) $(OBJDIR)/$(OBJ) $(LIB)\n"
+  "\n"
+  "clean :\n"
+  "		/bin/rm -f $(OBJDIR)/$(OBJ)\n"
+  "\n"
+  "fclean : clean\n"
+  "		/bin/rm -f $(NAME)\n"
+  "\n"
+  "re : fclean all\n"
+  "\n"
+  "debug : $(OBJ)\n"
+  "		$(CC) $(INC) $(CDEBUG) -o $(NAME) $(OBJDIR)/$(OBJ) $(LIB)\n"
+  "\n"
+  "%.o : %.c\n"
+  "		$(CC) $(INC) $(CFLAGS) -o $(OBJDIR)/$@ -c $<\n"
+  "\n"
+  ".PHONY : all clean re\n")
